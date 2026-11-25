@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perpustakaan Digital SMPN 13 Malang</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #14284b;
+      --navy-dark: #0d1b34;
+      --navy-soft: #1f3c6e;
+      --cream: #faf6ee;
+      --cream-dark: #efe7d6;
+      --accent: #c88a2b;
+      --text-dark: #1d2432;
+    }
+    body {
+      background-color: var(--cream);
+      color: var(--text-dark);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      scroll-behavior: smooth;
+    }
+    .navbar {
+      background-color: var(--navy);
+      box-shadow: 0 2px 12px rgba(13, 27, 52, 0.18);
+    }
+    .navbar-brand, .nav-link {
+      color: var(--cream) !important;
+      font-weight: 500;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: #f3c87a !important;
+    }
+    .hero-section {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+      color: var(--cream);
+      padding: 4rem 0 3.5rem;
+    }
+    .badge-pill-custom {
+      background-color: rgba(250, 246, 238, 0.15);
+      color: #f7d99c;
+      border: 1px solid rgba(247, 217, 156, 0.35);
+      padding: 0.4rem 0.95rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+    .btn-cream {
+      background-color: var(--cream);
+      color: var(--navy);
+      font-weight: 600;
+      border: none;
+      padding: 0.65rem 1.4rem;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .btn-cream:hover {
+      background-color: #f3c87a;
+      color: var(--navy-dark);
+      transform: translateY(-1px);
+    }
+    .btn-navy {
+      background-color: var(--navy);
+      color: var(--cream);
+      font-weight: 600;
+      border: none;
+      padding: 0.65rem 1.4rem;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .btn-navy:hover {
+      background-color: var(--navy-soft);
+      color: #fff;
+    }
+    .section-title {
+      color: var(--navy);
+      font-weight: 700;
+      position: relative;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+    .card-custom {
+      background-color: #ffffff;
+      border: 1px solid #e3dac8;
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(20, 40, 75, 0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card-custom:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 24px rgba(20, 40, 75, 0.12);
+    }
+    .bg-cream-alt {
+      background-color: var(--cream-dark);
+    }
+    /* Interactive Storyboard Video Player */
+    .video-stage {
+      background-color: var(--navy-dark);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 3px solid var(--navy);
+      box-shadow: 0 12px 30px rgba(13, 27, 52, 0.2);
+    }
+    .video-viewport {
+      position: relative;
+      height: 360px;
+      background: linear-gradient(160deg, #162e57 0%, #0d1b34 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      color: var(--cream);
+      text-align: center;
+      overflow: hidden;
+    }
+    .scene-slide {
+      animation: fadeSlideIn 0.6s ease forwards;
+      max-width: 640px;
+    }
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(14px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .scene-icon-circle {
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      background-color: rgba(250, 246, 238, 0.12);
+      border: 2px solid #f3c87a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.6rem;
+      color: #f3c87a;
+      margin: 0 auto 1.2rem;
+    }
+    .video-controls {
+      background-color: #091326;
+      padding: 0.9rem 1.25rem;
+      color: var(--cream);
+    }
+    .book-cover {
+      height: 170px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1rem;
+      color: var(--cream);
+      background: linear-gradient(145deg, var(--navy) 0%, var(--navy-soft) 100%);
+    }
+    .book-cover.alt {
+      background: linear-gradient(145deg, #27496d 0%, #14284b 100%);
+    }
+    .book-cover.gold {
+      background: linear-gradient(145deg, #8b5a19 0%, #5c3a0d 100%);
+    }
+    .audio-box {
+      background-color: var(--navy);
+      color: var(--cream);
+      border-radius: 14px;
+      padding: 1.5rem;
+    }
+    footer {
+      background-color: var(--navy-dark);
+      color: var(--cream);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#beranda" onclick="playClick()">
+        <img src="assets/logo.jpg" alt="Logo Perpustakaan" width="38" height="38" class="rounded-circle border border-light" style="object-fit: cover;" />
+        <span>Perpus Digital SMPN 13 Malang</span>
+      </a>
+      <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="#beranda" onclick="playClick()">Beranda</a></li>
+          <li class="nav-item"><a class="nav-link" href="#video-tutorial" onclick="playClick()">Video Tutorial</a></li>
+          <li class="nav-item"><a class="nav-link" href="#koleksi" onclick="playClick()">Koleksi & Audio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#infografis" onclick="playClick()">Grafis Panduan</a></li>
+          <li class="nav-item"><a class="nav-link btn btn-sm btn-cream text-dark px-3 ms-lg-2" href="#pendaftaran" onclick="playClick()">Daftar Anggota</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 1. BERANDA / HERO (ELEMEN GAMBAR & GRAFIS VISUAL) -->
+  <section id="beranda" class="hero-section">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-6">
+          <span class="badge-pill-custom"><i class="bi bi-stars me-1"></i> Portal Literasi Digital Sekolah</span>
+          <h1 class="display-5 fw-bold mb-3">Perpustakaan Digital SMPN 13 Malang</h1>
+          <p class="lead mb-4" style="color: #e6decb;">
+            Baca buku pelajaran, referensi tugas, hingga novel ringan langsung dari browser HP atau laptop tanpa perlu mengunduh aplikasi tambahan. Kumpulkan poin literasi setiap selesai membaca!
+          </p>
+          <div class="d-flex flex-wrap gap-3">
+            <a href="#video-tutorial" class="btn btn-cream" onclick="playClick()"><i class="bi bi-play-circle-fill me-2"></i>Tonton Video Panduan</a>
+            <a href="#pendaftaran" class="btn btn-outline-light px-4 py-2 rounded-3" onclick="playClick()">Daftar Anggota Baru</a>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card border-0 shadow-lg overflow-hidden rounded-4">
+            <img src="assets/banner.jpg" alt="Banner Perpustakaan Digital SMPN 13 Malang" class="img-fluid w-100" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. ELEMEN VIDEO / ANIMASI INTERAKTIF (SESUAI STORYBOARD 6 FRAME) -->
+  <section id="video-tutorial" class="py-5">
+    <div class="container">
+      <div class="text-center mb-4">
+        <span class="text-uppercase fw-semibold small" style="color: var(--accent);">Elemen Multimedia: Video & Animasi</span>
+        <h2 class="section-title d-block">Video Animasi Tutorial Penggunaan</h2>
+        <p class="text-muted">Adaptasi langsung dari 6 Frame Storyboard Perpustakaan Digital SMPN 13 Malang lengkap dengan narasi teks, animasi transisi, dan audio.</p>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-9">
+          <div class="video-stage">
+            <div class="video-viewport" id="videoViewport">
+              <!-- Scene content injected by JS -->
+            </div>
+            <div class="progress rounded-0" style="height: 6px; background-color: #1c2f52;">
+              <div id="videoProgress" class="progress-bar bg-warning" style="width: 16.6%;"></div>
+            </div>
+            <div class="video-controls d-flex flex-wrap justify-content-between align-items-center gap-2">
+              <div class="d-flex align-items-center gap-2">
+                <button id="btnPlayPause" class="btn btn-warning btn-sm fw-bold px-3" onclick="toggleVideoPlay()">
+                  <i class="bi bi-play-fill me-1"></i> Putar Video
+                </button>
+                <button class="btn btn-outline-light btn-sm" onclick="prevScene()" title="Scene Sebelumnya"><i class="bi bi-skip-backward-fill"></i></button>
+                <button class="btn btn-outline-light btn-sm" onclick="nextScene()" title="Scene Berikutnya"><i class="bi bi-skip-forward-fill"></i></button>
+              </div>
+              <div class="small text-light" id="sceneIndicator">Frame 01 / 06 — Intro Sekolah</div>
+              <div class="d-flex align-items-center gap-2">
+                <span class="badge bg-secondary"><i class="bi bi-volume-up-fill me-1"></i>Audio Aktif</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. ELEMEN KOLEKSI BUKU (GAMBAR) & AUDIO LITERASI (AUDIO) -->
+  <section id="koleksi" class="py-5 bg-cream-alt">
+    <div class="container">
+      <div class="row align-items-end mb-4">
+        <div class="col-md-8">
+          <span class="text-uppercase fw-semibold small" style="color: var(--accent);">Elemen Multimedia: Teks, Gambar & Audio</span>
+          <h2 class="section-title d-block">Rekomendasi Bacaan & Audio Literasi</h2>
+          <p class="text-muted mb-0">Pilih bacaan sesuai jenjang kelas atau dengarkan audio pengantar perpustakaan digital.</p>
+        </div>
+        <div class="col-md-4 text-md-end mt-3 mt-md-0">
+          <span class="badge bg-dark px-3 py-2 fs-6"><i class="bi bi-trophy-fill text-warning me-1"></i> Poin Kamu: <span id="userPoints">120</span> Poin</span>
+        </div>
+      </div>
+
+      <!-- Audio Player Bar -->
+      <div class="audio-box mb-4 shadow-sm">
+        <div class="row align-items-center g-3">
+          <div class="col-md-7">
+            <h5 class="mb-1"><i class="bi bi-headphones text-warning me-2"></i>Audio Sambutan & Jingle Literasi SMPN 13 Malang</h5>
+            <p class="small mb-0 text-light opacity-75">Dengarkan musik pembuka resmi portal perpustakaan digital sebelum mulai menjelajahi koleksi.</p>
+          </div>
+          <div class="col-md-5">
+            <audio controls class="w-100">
+              <source src="assets/audio_sambutan.wav" type="audio/wav" />
+              Browser Anda tidak mendukung pemutar audio.
+            </audio>
+          </div>
+        </div>
+      </div>
+
+      <!-- Book Cards -->
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card-custom p-3 h-100 d-flex flex-column">
+            <div class="book-cover mb-3">
+              <span class="badge bg-warning text-dark align-self-start">Kelas VII</span>
+              <div>
+                <h5 class="fw-bold mb-1">Ilmu Pengetahuan Alam Terpadu</h5>
+                <small class="opacity-75">Modul Kurikulum Merdeka</small>
+              </div>
+            </div>
+            <p class="small text-muted flex-grow-1">Buku pengantar materi IPA lengkap dengan ilustrasi eksperimen laboratorium untuk siswa kelas VII SMPN 13 Malang.</p>
+            <button class="btn btn-navy btn-sm w-100" onclick="claimReadPoint('IPA Terpadu Kelas VII')">
+              <i class="bi bi-book-half me-1"></i> Baca & Klaim +20 Poin
+            </button>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card-custom p-3 h-100 d-flex flex-column">
+            <div class="book-cover alt mb-3">
+              <span class="badge bg-info text-dark align-self-start">Kelas VIII & IX</span>
+              <div>
+                <h5 class="fw-bold mb-1">Panduan Literasi Digital & Etika</h5>
+                <small class="opacity-75">Referensi Tugas & Umum</small>
+              </div>
+            </div>
+            <p class="small text-muted flex-grow-1">Bacaan ringan tentang cara mencari sumber informasi kredibel di internet dan menjaga keamanan data pribadi.</p>
+            <button class="btn btn-navy btn-sm w-100" onclick="claimReadPoint('Panduan Literasi Digital')">
+              <i class="bi bi-book-half me-1"></i> Baca & Klaim +20 Poin
+            </button>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card-custom p-3 h-100 d-flex flex-column">
+            <div class="book-cover gold mb-3">
+              <span class="badge bg-light text-dark align-self-start">Rekomendasi Guru</span>
+              <div>
+                <h5 class="fw-bold mb-1">Antologi Cerita Sejarah Kota Malang</h5>
+                <small class="opacity-75">Bacaan Pengayaan</small>
+              </div>
+            </div>
+            <p class="small text-muted flex-grow-1">Kumpulan kisah sejarah lokal Malang Raya untuk menambah wawasan budaya siswa dan bahan ajar guru.</p>
+            <button class="btn btn-navy btn-sm w-100" onclick="claimReadPoint('Antologi Sejarah Kota Malang')">
+              <i class="bi bi-book-half me-1"></i> Baca & Klaim +20 Poin
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. ELEMEN GRAFIS VISUAL (POSTER INFOGRAFIS & STORYBOARD) -->
+  <section id="infografis" class="py-5">
+    <div class="container">
+      <div class="text-center mb-4">
+        <span class="text-uppercase fw-semibold small" style="color: var(--accent);">Elemen Multimedia: Grafis Visual</span>
+        <h2 class="section-title d-block">Infografis Panduan & Storyboard Rancangan</h2>
+        <p class="text-muted">Visualisasi alur akses layanan dan konsep gamifikasi poin literasi untuk siswa dan guru.</p>
+      </div>
+
+      <div class="row g-4 align-items-center">
+        <div class="col-md-6">
+          <div class="card-custom p-3 text-center">
+            <h6 class="fw-bold mb-3" style="color: var(--navy);">Poster Infografis 4 Langkah Akses</h6>
+            <img src="assets/infografis.jpg" alt="Infografis Panduan Akses Perpustakaan" class="img-fluid rounded-3 shadow-sm" style="max-height: 460px;" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card-custom p-3 text-center">
+            <h6 class="fw-bold mb-3" style="color: var(--navy);">Storyboard Rancangan Multimedia (6 Frame)</h6>
+            <img src="assets/storyboard.png" alt="Storyboard Perpustakaan Digital SMPN 13" class="img-fluid rounded-3 shadow-sm" style="max-height: 460px;" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. FORM PENDAFTARAN ANGGOTA (FITUR WAJIB DEMO & VALIDASI) -->
+  <section id="pendaftaran" class="py-5 bg-cream-alt">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-7">
+          <div class="card-custom p-4 p-md-5">
+            <div class="text-center mb-4">
+              <span class="badge bg-primary-subtle text-primary-emphasis px-3 py-2 rounded-pill mb-2">Registrasi Akun Literasi</span>
+              <h3 class="fw-bold" style="color: var(--navy);">Form Pendaftaran Anggota Perpustakaan</h3>
+              <p class="text-muted small">Lengkapi data di bawah ini untuk mengaktifkan akun baca dan fitur pengumpulan poin.</p>
+            </div>
+
+            <form id="formPendaftaran" novalidate>
+              <div class="mb-3">
+                <label for="namaLengkap" class="form-label fw-semibold">Nama Lengkap <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="namaLengkap" placeholder="Contoh: Azalea Ivana" required minlength="3" />
+                <div class="invalid-feedback">Nama lengkap wajib diisi (minimal 3 huruf).</div>
+              </div>
+
+              <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                  <label for="nisn" class="form-label fw-semibold">NISN / NIP <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="nisn" placeholder="10 digit angka NISN" required pattern="^[0-9]{10}$" />
+                  <div class="invalid-feedback">NISN wajib berupa 10 digit angka.</div>
+                </div>
+                <div class="col-md-6">
+                  <label for="peran" class="form-label fw-semibold">Status & Kelas <span class="text-danger">*</span></label>
+                  <select class="form-select" id="peran" required>
+                    <option value="">-- Pilih Kelas / Status --</option>
+                    <option value="Siswa Kelas VII">Siswa Kelas VII</option>
+                    <option value="Siswa Kelas VIII">Siswa Kelas VIII</option>
+                    <option value="Siswa Kelas IX">Siswa Kelas IX</option>
+                    <option value="Guru / Tenaga Kependidikan">Guru / Tenaga Kependidikan</option>
+                  </select>
+                  <div class="invalid-feedback">Silakan pilih kelas atau status pengguna.</div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="emailAktif" class="form-label fw-semibold">Email Aktif <span class="text-danger">*</span></label>
+                <input type="email" class="form-control" id="emailAktif" placeholder="nama@smpn13malang.sch.id" required />
+                <div class="invalid-feedback">Masukkan format alamat email yang valid (contoh: nama@email.com).</div>
+              </div>
+
+              <div class="mb-4">
+                <label for="minatBaca" class="form-label fw-semibold">Kategori Bacaan Favorit <span class="text-danger">*</span></label>
+                <select class="form-select" id="minatBaca" required>
+                  <option value="">-- Pilih Kategori --</option>
+                  <option value="Buku Pelajaran & Modul">Buku Pelajaran & Modul</option>
+                  <option value="Referensi Tugas & Karya Ilmiah">Referensi Tugas & Karya Ilmiah</option>
+                  <option value="Novel & Bacaan Ringan">Novel & Bacaan Ringan</option>
+                </select>
+                <div class="invalid-feedback">Pilih kategori bacaan favorit terlebih dahulu.</div>
+              </div>
+
+              <button type="submit" class="btn btn-navy w-100 py-2 fs-6">
+                <i class="bi bi-check-circle-fill me-2"></i>Kirim Pendaftaran Anggota
+              </button>
+            </form>
+
+            <!-- Bukti Pengiriman Data Berhasil -->
+            <div id="hasilPendaftaran" class="alert alert-success mt-4 d-none border-success" role="alert">
+              <div class="d-flex align-items-center mb-2">
+                <i class="bi bi-patch-check-fill fs-3 me-2 text-success"></i>
+                <h5 class="alert-heading mb-0 fw-bold">Pendaftaran Berhasil Terkirim!</h5>
+              </div>
+              <p class="small mb-2">Akun Perpustakaan Digital SMPN 13 Malang Anda telah aktif dengan rincian:</p>
+              <ul class="small mb-2" id="detailBuktiDaftar"></ul>
+              <span class="badge bg-success">+50 Poin Bonus Anggota Baru telah ditambahkan!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-4 text-center">
+    <div class="container">
+      <p class="mb-1 fw-semibold">Perpustakaan Digital SMPN 13 Malang</p>
+      <small class="opacity-75">Projek Pengembangan Produk Multimedia — Terintegrasi Teks, Gambar, Grafis Visual, Audio & Video</small>
+    </div>
+  </footer>
+
+  <!-- Hidden Audio Elements for SFX -->
+  <audio id="sfxKlik" src="assets/sfx_klik.wav"></audio>
+  <audio id="sfxReward" src="assets/sfx_reward.wav"></audio>
+  <audio id="bgmVideo" src="assets/audio_sambutan.wav" loop></audio>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Data 6 Scene dari Storyboard SMPN 13 Malang
+    const scenes = [
+      {
+        frame: "Frame 01 / 06 — Intro Sekolah",
+        icon: "bi-building",
+        title: "Selamat Datang di Perpustakaan SMPN 13 Malang",
+        text: "Ayo kenali layanan Perpustakaan Digital SMPN 13 Malang yang modern dan ramah siswa!",
+        audioInfo: "Audio: Suara pagi & musik ceria | Transisi: Fade In"
+      },
+      {
+        frame: "Frame 02 / 06 — Masalah Siswa",
+        icon: "bi-question-circle",
+        title: "Banyak Buku, Bingung Pilih yang Mana?",
+        text: "Siswa sering kesulitan mencari referensi cepat atau malas mengunduh aplikasi tambahan di HP.",
+        audioInfo: "Audio: Efek hela napas & tanda tanya | Transisi: Cut"
+      },
+      {
+        frame: "Frame 03 / 06 — Solusi Website",
+        icon: "bi-phone-vibrate",
+        title: "Coba Cari Buku Lewat Website HP!",
+        text: "Kini perpustakaan hadir dalam bentuk website responsif yang ringan diakses langsung dari browser.",
+        audioInfo: "Audio: Bunyi notifikasi 'Ding!' | Transisi: Slide"
+      },
+      {
+        frame: "Frame 04 / 06 — Akses Mudah",
+        icon: "bi-laptop",
+        title: "Buka Lewat Web, Mudah dan Praktis!",
+        text: "Cukup login dengan NISN, langsung temukan buku pelajaran kelas VII–IX dan bahan ajar guru.",
+        audioInfo: "Audio: Suara klik & loading cepat | Transisi: Zoom In"
+      },
+      {
+        frame: "Frame 05 / 06 — Fitur & Gamifikasi",
+        icon: "bi-trophy",
+        title: "Baca Buku, Kumpulkan Poin Reward!",
+        text: "Dapatkan rekomendasi bacaan personal dan kumpulkan poin literasi setiap kali selesai membaca.",
+        audioInfo: "Audio: Musik ceria & bunyi reward | Transisi: Dissolve"
+      },
+      {
+        frame: "Frame 06 / 06 — Penutup",
+        icon: "bi-graph-up-arrow",
+        title: "Literasi Meningkat, Belajar Jadi Menyenangkan!",
+        text: "Mari budayakan membaca kapan saja dan di mana saja bersama Perpustakaan Digital SMPN 13 Malang.",
+        audioInfo: "Audio: Musik penutup hangat | Transisi: Fade Out"
+      }
+    ];
+
+    let currentScene = 0;
+    let isPlaying = false;
+    let slideInterval = null;
+    let points = 120;
+
+    function renderScene(index) {
+      const s = scenes[index];
+      const viewport = document.getElementById("videoViewport");
+      viewport.innerHTML = `
+        <div class="scene-slide">
+          <div class="scene-icon-circle"><i class="bi ${s.icon}"></i></div>
+          <span class="badge bg-warning text-dark mb-2">${s.frame}</span>
+          <h3 class="fw-bold mb-2">${s.title}</h3>
+          <p class="lead mb-3" style="color: #efe7d6;">"${s.text}"</p>
+          <small class="text-info"><i class="bi bi-soundwave me-1"></i>${s.audioInfo}</small>
+        </div>
+      `;
+      document.getElementById("sceneIndicator").textContent = s.frame;
+      document.getElementById("videoProgress").style.width = `${((index + 1) / scenes.length) * 100}%`;
+    }
+
+    function toggleVideoPlay() {
+      const btn = document.getElementById("btnPlayPause");
+      const bgm = document.getElementById("bgmVideo");
+      if (!isPlaying) {
+        isPlaying = true;
+        btn.innerHTML = '<i class="bi bi-pause-fill me-1"></i> Jeda Video';
+        bgm.play().catch(() => {});
+        slideInterval = setInterval(() => {
+          currentScene = (currentScene + 1) % scenes.length;
+          renderScene(currentScene);
+        }, 3500);
+      } else {
+        isPlaying = false;
+        btn.innerHTML = '<i class="bi bi-play-fill me-1"></i> Putar Video';
+        bgm.pause();
+        clearInterval(slideInterval);
+      }
+    }
+
+    function nextScene() {
+      playClick();
+      currentScene = (currentScene + 1) % scenes.length;
+      renderScene(currentScene);
+    }
+
+    function prevScene() {
+      playClick();
+      currentScene = (currentScene - 1 + scenes.length) % scenes.length;
+      renderScene(currentScene);
+    }
+
+    function playClick() {
+      const sfx = document.getElementById("sfxKlik");
+      sfx.currentTime = 0;
+      sfx.play().catch(() => {});
+    }
+
+    function playReward() {
+      const sfx = document.getElementById("sfxReward");
+      sfx.currentTime = 0;
+      sfx.play().catch(() => {});
+    }
+
+    function claimReadPoint(bookTitle) {
+      points += 20;
+      document.getElementById("userPoints").textContent = points;
+      playReward();
+      alert(`Selamat! Kamu telah membuka "${bookTitle}" dan mendapatkan +20 Poin Literasi. Total poin: ${points}`);
+    }
+
+    // Validasi Form Pendaftaran (Sesuai Panduan Demo)
+    const form = document.getElementById("formPendaftaran");
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (!form.checkValidity()) {
+        form.classList.add("was-validated");
+        playClick();
+        return;
+      }
+
+      form.classList.add("was-validated");
+      const nama = document.getElementById("namaLengkap").value.trim();
+      const nisn = document.getElementById("nisn").value.trim();
+      const peran = document.getElementById("peran").value;
+      const email = document.getElementById("emailAktif").value.trim();
+      const minat = document.getElementById("minatBaca").value;
+
+      points += 50;
+      document.getElementById("userPoints").textContent = points;
+      playReward();
+
+      const detailList = document.getElementById("detailBuktiDaftar");
+      detailList.innerHTML = `
+        <li><strong>Nama:</strong> ${nama}</li>
+        <li><strong>NISN / NIP:</strong> ${nisn}</li>
+        <li><strong>Status / Kelas:</strong> ${peran}</li>
+        <li><strong>Email:</strong> ${email}</li>
+        <li><strong>Minat Bacaan:</strong> ${minat}</li>
+      `;
+
+      const hasilBox = document.getElementById("hasilPendaftaran");
+      hasilBox.classList.remove("d-none");
+      hasilBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+
+    // Init first scene
+    renderScene(0);
+  </script>
+</body>
+</html>
